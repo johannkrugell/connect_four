@@ -61,4 +61,43 @@ class Board
       puts '   +---+---+---+---+---+---+---+'
     end
   end
+
+  def populated?
+    @board.each do |row|
+      return false if row.include?(' ')
+    end
+    true
+  end
+
+  def populate_board
+    row = 0
+    col = 0
+    char_array = ('A'..'G').to_a
+    6.times do
+      7.times do
+        move(row, col, char_array.sample)
+        col += 1
+      end
+      col = 0
+      row += 1
+    end
+  end
+
+  def tie?
+    if four_in_a_row? == false &&
+       four_in_a_column? == false &&
+       four_in_a_diagonal? == false &&
+       populated? == true
+      true
+    else
+      false
+    end
+  end
+
+  def valid_move?(row, col)
+    # check if move is valid
+    return true if row.between?(0, 6) && col.between?(0, 7) && (@board[row][col] == ' ')
+
+    false
+  end
 end

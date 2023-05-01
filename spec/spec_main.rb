@@ -65,4 +65,32 @@ class TestBoard < Minitest::Test
     @board.clear_board
     assert_equal ' ', @board.board[0][0]
   end
+
+  def test_tie
+    row = 0
+    col = 0
+    char_array = ('A'..'G').to_a
+    6.times do
+      7.times do
+        @board.move(row, col, char_array.sample)
+        col += 1
+      end
+      col = 0
+      row += 1
+    end
+    assert_equal true, @board.tie?
+  end
+
+  def test_valid_move?
+    assert_equal true, @board.valid_move?(0, 0)
+  end
+
+  def test_invalid_move_coordinates_used
+    @board.move(0, 0, 'X')
+    assert_equal false, @board.valid_move?(0, 0)
+  end
+
+  def test_invalid_move_coordinates_out_of_bounds
+    assert_equal false, @board.valid_move?(0, 8)
+  end
 end
