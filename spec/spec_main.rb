@@ -93,4 +93,12 @@ class TestBoard < Minitest::Test
   def test_invalid_move_coordinates_out_of_bounds
     assert_equal false, @board.valid_move?(0, 8)
   end
+
+  def test_winner?
+    @board.move(0, 0, 'X')
+    @board.move(0, 1, 'X')
+    @board.move(0, 2, 'X')
+    @board.move(0, 3, 'X')
+    assert_equal true, @board.winner?
+  end
 end

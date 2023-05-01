@@ -100,4 +100,14 @@ class Board
 
     false
   end
+
+  def winner?
+    if four_in_a_row? == true ||
+       four_in_a_column? == true ||
+       four_in_a_diagonal? == true
+      true
+    else
+      false
+    end
+  end
 end
