@@ -24,4 +24,26 @@ class Player
     index = @@player_count - 1
     @marker = markers[index]
   end
+
+  def assign_name
+    puts "Enter player #{@@player_count}'s name: "
+    @name = gets.chomp
+  end
+
+  def convert_coordinates
+    coordinates = enter_coordinates
+    coordinates = coordinates.split('')
+    coordinates[0] = coordinates[0].ord - 65
+    coordinates[1] = coordinates[1].to_i - 1
+    coordinates
+  end
+
+  def enter_coordinates
+    puts "#{@name} enter the column and row for your move (A1): "
+    gets.chomp
+  end
+
+  def print_player_details
+    puts "#{@name} your marker is #{@marker}"
+  end
 end

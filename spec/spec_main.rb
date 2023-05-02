@@ -23,6 +23,12 @@ class TestPlayer < Minitest::Test
     assert_equal "\u2663", @player1.marker
     assert_equal "\u2664", @player2.marker
   end
+
+  def test_player_select_coordinates
+    @player1.stub :enter_coordinates, 'A1' do
+      assert_equal [0, 0], @player1.convert_coordinates
+    end
+  end
 end
 
 # Tests Board class
