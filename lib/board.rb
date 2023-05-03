@@ -52,12 +52,12 @@ class Board
     i = 0
     puts '     A   B   C   D   E   F   G'
     puts '   +---+---+---+---+---+---+---+'
-    puts " 1 | #{@board[0][0]} |   |   |   |   |   |   |"
+    puts " 1 | #{@board[0][0]} | #{@board[0][1]} | #{@board[0][2]} | #{@board[0][3]} | #{@board[0][4]} | #{@board[0][5]} | #{@board[0][6]} |"
     puts '   +---+---+---+---+---+---+---+'
 
     5.times do
-      i += 2
-      puts " #{i} |   |   |   |   |   |   |   |"
+      i += 1
+      puts " #{i} | #{@board[i][0]} | #{@board[i][1]} | #{@board[i][2]} | #{@board[i][3]} | #{@board[i][4]} | #{@board[i][5]} | #{@board[i][6]} |"
       puts '   +---+---+---+---+---+---+---+'
     end
   end

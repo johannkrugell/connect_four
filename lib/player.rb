@@ -11,8 +11,8 @@ class Player
   def initialize(name, marker)
     @name = name
     @marker = marker
-    @@player_count += 1
     assign_marker
+    @@player_count += 1
   end
 
   def self.player_count
@@ -21,7 +21,7 @@ class Player
 
   def assign_marker
     markers = ["\u2663", "\u2664"]
-    index = @@player_count - 1
+    index = @@player_count
     @marker = markers[index]
   end
 
