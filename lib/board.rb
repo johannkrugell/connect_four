@@ -2,6 +2,8 @@
 
 require 'pry-byebug'
 require 'matrix'
+require './lib/display'
+
 # Board class creates a board object, stores board state, and prints board
 class Board
   attr_accessor :board
@@ -49,6 +51,7 @@ class Board
   end
 
   def print_board
+    Display.clear_display
     i = 0
     puts '     A   B   C   D   E   F   G'
     puts '   +---+---+---+---+---+---+---+'
@@ -57,7 +60,7 @@ class Board
 
     5.times do
       i += 1
-      puts " #{i} | #{@board[i][0]} | #{@board[i][1]} | #{@board[i][2]} | #{@board[i][3]} | #{@board[i][4]} | #{@board[i][5]} | #{@board[i][6]} |"
+      puts " #{i + 1} | #{@board[i][0]} | #{@board[i][1]} | #{@board[i][2]} | #{@board[i][3]} | #{@board[i][4]} | #{@board[i][5]} | #{@board[i][6]} |"
       puts '   +---+---+---+---+---+---+---+'
     end
   end

@@ -25,6 +25,12 @@ class TestGame < Minitest::Test
     assert_equal true, @game.game_over?
   end
 
+  def test_invalid_move
+    Game.stub :convert_coordinates, 'A1' do
+      assert_equal [0, 0], @current_player.convert_coordinates
+    end
+  end
+
   def test_game_over_rows
     @game.board.move(0, 0, 'X')
     @game.board.move(0, 1, 'X')

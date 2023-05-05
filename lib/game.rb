@@ -3,6 +3,8 @@
 require './lib/player'
 require './lib/board'
 
+require 'pry-byebug'
+
 # Game class creates a game object, stores game state, and prints game
 class Game
   attr_accessor :board, :player1, :player2, :current_player, :turn
@@ -15,33 +17,57 @@ class Game
     @turn = 0
   end
 
-  def game_over?
-    return true if @board.four_in_a_row?
-    return true if @board.four_in_a_column?
-    return true if @board.four_in_a_diagonal?
-    return true if @turn == 42
+  def self.exit_game?
+    exit
+  end
 
+  def game_over?
+    if @board.four_in_a_row? || @board.four_in_a_column? || @board.four_in_a_diagonal?
+      @board.print_board
+      puts "#{@current_player.name} wins! Game over!"
+      return true
+    elsif @turn == 42 || @board.tie?
+      @board.print_board
+      puts 'Game over! Tie game!'
+      return true
+    end
     false
   end
 
-  def play_game?
+  def game_tied?
+    return true if @board.tie?
+  end
+
+  def self.play_game?
     puts 'Would you like to play a game of connect four? (y/n)'
     answer = gets.chomp.downcase
     return true if answer == 'y'
   end
 
   def play
+    player1.assign_name
+    player2.assign_name
     loop do
       @board.print_board
-      @current_player.enter_coordinates
-      @board.move(@current_player.row, @current_player.col, @current_player.marker)
+      player_coordinates = valid_move?
+      @board.move(player_coordinates[1], player_coordinates[0], @current_player.marker)
       break if game_over?
 
       @turn += 1
       switch_players
     end
-    @board.print_board
-    puts 'Game over!'
+  end
+
+  def valid_move?
+    loop do
+      player_coordinates = @current_player.convert_coordinates
+      return player_coordinates if @board.valid_move?(player_coordinates[1], player_coordinates[0]) == true
+
+      puts 'Invalid move, try again.'
+      sleep(2)
+      Display.clear_display
+      @board.print_board
+    end
   end
 
   def switch_players
